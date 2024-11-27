@@ -24,17 +24,183 @@ mutate(across(where(is.character), as.factor))
 
 A new  preventative vaccine (covid921) is under test in clinical trials. Given the nature of this vaccine it is suspected that the drug may exhibit different effectiveness across the variety of subpopulations tracked. Consider population subgroups by gender( guys and gals), drug use, and sexual orientation. Write a complete report that separately considers this drug for each subgroup and your recommendations as to whether people in the subgroup should take the vaccine. Structure your report in four sections each devoted to one of the four subgroups, use null and alternative hypothesis statements and correct statistical verbage when referencing p-values in conclusions.
 
-## Males
+## Males    
+
+##Methods    
+$H_0$ The preventative vaccine does not exhibit effectiveness in males      
+$H_A$ The preventative vaccine exhibits effectiveness in males.      
+
+```{r}
+Males = FinalData[FinalData$sex=='M',]
+head(Males)
+```
+
+
+##Graphical results  
+```{r}
+barchartGC(~infected + treatment,data=Males)
+barchartGC(~infected + treatment,data=Males, type="percent")
+
+```
+
+The bar graph shows that the vaccine is effective in preventing covid19 in males because the amount of males who received the vaccine and contracted covid19 was lower than the men who had received the placebo and contracted covid19.           
+
+
+##Numerical Results
+```{r}
+table1 <- xtabs(~infected + treatment, data=Males)
+rowPerc(table1)
+colPerc(table1)
+```
+
+The table shows that only 26.20% of men received the vaccine and contracted covid19. This is in comparison so the men who contracted covid19 and received the placebo which was 73.80%                        
+
+
+##Inferential Results     
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+The p-value from the chi-squared test is 0.00000000000000022 which is less than 0.05 therefore we reject the null hypothesis. The odds ratio from the fisher's exact test was 2.815 which means that the vaccine has a 2.8 chance of being effective in males.             
 
 
 ## Females
 
+##Methods      
+$H_0$ The preventative vaccine does not exhibit its effective in females        
+$H_A$ The preventative vaccine exhibits its effective in females.     
 
-## LGBTQ
+```{r}
+Females = FinalData[FinalData$sex=='F',]
+head(Females)
+```
+
+##Graphical Results  
+```{r}
+barchartGC(~infected + treatment,data=Females)
+barchartGC(~infected + treatment,data=Females, type="percent")
+
+```
+
+The bar graph shows that the vaccine is more effective in women who contracted covid19 compared to women who received the placebo.              
 
 
+##Numerical Results    
+```{r}
+table1 <- xtabs(~infected + treatment, data=Females)
+rowPerc(table1)
+colPerc(table1)
+```
 
-## Druggies
+The numerical results show that about 35.07% of women who received the vaccine also contracted covid19. This is compared to women who contracted covid19 and received the placebo which was 64.93% which implies that the vaccine is effective in preventing covid19 in women.           
 
 
-# Overall Results and Conclusions
+##Inferential Results    
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+The p-value from the chi-squared test is 0.00000001914 which is less than 0.05 therefore we reject the null hypothesis. The odds ratio from the fisher's exact test is 1.856 which means that there is approximately a 1.86 chance that the vaccine will be effective in women.     
+
+
+## LGBTQ    
+
+##Methods       
+$H_0$ The preventative vaccine does not exhibit its effective in people who are LGBTQ.        
+$H_A$ The preventative vaccine exhibits its effective in people who are LGBTQ.       
+
+```{r}
+gay = FinalData[FinalData$LGBTQ=='gay',]
+head(gay)
+```
+
+##Graphical Results    
+```{r}
+barchartGC(~infected + treatment,data=gay)
+barchartGC(~infected + treatment,data=gay, type="percent")
+
+```
+
+The bar graph shows that the vaccine is effective in preventing covid19 in people who are LGBTQ. There is about 20% of LGBTQ people who contracted covid19 and received the vaccine which is significantly lower than the amount of LGBTQ people who received the placebo and contracted covid19.            
+
+
+##Numerical Results    
+```{r}
+table1 <- xtabs(~infected + treatment, data=gay)
+rowPerc(table1)
+colPerc(table1)
+```
+
+The table shows that 20% of LGBTQ people who received the vaccine also contracted covid19. Compared to the LGBTQ people who received the placebo and contracted vaccine which is 80%, we can assume the vaccine is effective at preventing LGBTQ people from contracting covid19.        
+
+
+##Inferential Results   
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+The p-value from the chi-squared test is 0.000002266 which is less than 0.05 therefore we reject the null hypothesis. The odds ratio from the fisher's exact test is 4.27 which means that the vaccine has a 4.27 chance of being effective in preventing covid19 in people who are LGBTQ.   
+
+## Druggies     
+
+##Methods       
+$H_0$ The preventative vaccine does not exhibit its effective in people who are drug users.    
+$H_A$ The preventative vaccine exhibits its effective in people who are drug users.     
+
+```{r}
+DrugUser = FinalData[FinalData$DrugUser=='yes',]
+```
+
+
+##Graphical Results    
+```{r}
+barchartGC(~infected + treatment,data=DrugUser)
+barchartGC(~infected + treatment,data=DrugUser, type="percent")
+
+```
+
+The bar graphs shows that vaccine is more likely to be less effective in people who are drug users.The amount of people who received the vaccine and contracted covid19 passed 80% which is significantly higher than drug users who received the placebo.           
+
+
+##Numerical Results     
+```{r}
+table1 <- xtabs(~infected + treatment, data=DrugUser)
+rowPerc(table1)
+colPerc(table1)
+```
+
+The table shows that 91.67% of drug users who contracted covid19 also received the vaccine. This implies that the preventative vaccine is not effective in people who are drug users because the amount of drug users who contracted covid19 and received the placebo was 8.33%.      
+
+
+##Inferential Results      
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+The p-value from the chi-squared test is 0.0000000001414 which is less than 0.05 therefore we reject the null hypothesis. The odds ratio from the fisher's exact test is 0.087 which means that the vaccine has a lower chance of being effective in people who are drug users. 
+
+
+# Overall Results and Conclusions       
+
+##Males     
+From the date gathered we can conclude that the vaccine does exhibit effectiveness in preventing covid19 in males. The numerical table shows that 26.20% men contracted covid19 and received the vaccine compared to men who received the placebo which was 73.80%. The p-value from the chi-squared was 0.00000000000000022 which is less than 0.05 therefore we reject the null hypothesis. The odds of the vaccine being effective in men is about a 2.8 chance, so we can assume that the vaccine will be effective in preventing covid19 in males.     
+
+ 
+##Females      
+From the data we gathered, we can conclude that the vaccine exhibits effectiveness in preventing covid19 in females. The numerical tables shows that 35.07% women who contracted covid19 received the vaccine compared to the women who received the placebo which was 64.93%. The p-value from the chi-squared test was 0.00000001914 which is less than 0.05 therefore we reject the null hypothesis. The odds of the vaccine being effective in women is about a 1.86 chance. We can assume that the vaccine is effective in preventing covid19 in females based on the data.      
+
+
+##LGBTQ       
+With the data we gathered, we can conclude that the vaccine exhibits effectiveness in preventing covid19 in people who are LGBTQ. The numerical tables shows that 20% of people who are LGBTQ contracted covid19 and also received the vaccine. The number of LGBTQ people who received the placebo was 80% which means the vaccine is effective in preventing covid19 in people who are LGBTQ. The p-value from the chi-squared test is 0.000002266 which is less than 0.05 therefore we reject the null hypothesis. The odds ratio from the fisher's exact test is 4.27 which means the vaccine has a 4.27 chance of being effective in preventing covid19 in people who are LGBTQ. It is safe to assume that the new preventative vaccine will be effective in people who are LGBTQ.   
+
+
+##Drug Users      
+With the data we gathered, we can conclude that the vaccine is less likely to be effective in preventing covid19 in drug users. In the numerical table, approximately 91.67% of drug users who contracted covid19 also received the vaccine compared to drug users who received the placebo which was 8.33%. The p-value from the chi-squared test was 0.0000000001414 which is less than 0.05 therefore we reject the null hypothesis. The odds ratio from the fisher's exact test is 0.087 which means that the vaccine is less likely to effective in people who are drug users. From these results we can assume that the vaccine will not be effective in preventing covid19 in people who are drug users.     
