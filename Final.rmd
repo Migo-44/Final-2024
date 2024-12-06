@@ -1,6 +1,6 @@
 ---
 title: "Covid91 vaccine study Final2024"
-author: "Put your name here!"
+author: "Miguel Avila"
 output: 
   html_document:
     number_sections: true
@@ -22,12 +22,12 @@ mutate(across(where(is.character), as.factor))
 
 # Introduction
 
-A new  preventative vaccine (covid921) is under test in clinical trials. Given the nature of this vaccine it is suspected that the drug may exhibit different effectiveness across the variety of subpopulations tracked. Consider population subgroups by gender( guys and gals), drug use, and sexual orientation. Write a complete report that separately considers this drug for each subgroup and your recommendations as to whether people in the subgroup should take the vaccine. Structure your report in four sections each devoted to one of the four subgroups, use null and alternative hypothesis statements and correct statistical verbage when referencing p-values in conclusions.
+A new  preventative vaccine (covid921) is under test in clinical trials. Given the nature of this vaccine, it's suspected that the drug may exhibit different effectiveness across the variety of subpopulations tracked. Consider population subgroups by gender( guys and gals), drug use, and sexual orientation. Write a complete report that separately considers this drug for each subgroup and your recommendations as to whether people in the subgroup should take the vaccine. Structure your report in four sections each devoted to one of the four subgroups, use null and alternative hypothesis statements and correct statistical verbage when referencing p-values in conclusions.
 
 ## Males    
 
 ##Methods    
-$H_0$ The preventative vaccine does not exhibit effectiveness in males      
+$H_0$ The preventative vaccine doesn't exhibit effectiveness in males      
 $H_A$ The preventative vaccine exhibits effectiveness in males.      
 
 ```{r}
@@ -43,7 +43,9 @@ barchartGC(~infected + treatment,data=Males, type="percent")
 
 ```
 
-The bar graph shows that the vaccine is effective in preventing covid19 in males because the amount of males who received the vaccine and contracted covid19 was lower than the men who had received the placebo and contracted covid19.           
+The bar graph shows that the vaccine is effective in preventing covid19 in males ,because the amount of males who received the vaccine and contracted covid19 was lower than the men who had received the placebo and contracted covid19.
+
+
 
 
 ##Numerical Results
